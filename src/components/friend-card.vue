@@ -1,9 +1,54 @@
 <template>
-    <div class="card">
-        <h2>RONAN OGOR</h2>
-        <p>The best teacher</p>
-    </div>
+  <section>
+    <ul class="card">
+  
+        <h2>{{ friend.firstName }} {{ friend.lastName }}</h2>
+        <p>{{ friend.comment}}</p>
+       <sub-friendCard
+       v-for="skill of skills"
+      :key="skill.id"
+      :skill="skill"
+       ></sub-friendCard>
+        <button @click="deleteFriend()">
+          Delete
+        </button>
+
+       
+     
+    </ul>
+  </section>
 </template>
+
+<script>
+export default {
+  emits: ['deleteFriend'],
+  props: {
+    friend: {
+      type: Object,
+      
+    },
+    
+  },
+  data() {
+    return {
+        skills:[
+            {
+                subject:'HTML',
+
+            }
+        ]
+        
+      
+    };
+  },
+  methods: {
+    
+    deleteFriend(){
+      this.$emit('deleteFriend', this.friend.id)
+    }
+  },
+};
+</script>
 
 <style>
 .card{
@@ -14,5 +59,4 @@
     background: rgb(189, 186, 186);
     padding: 10px;
 }
-
 </style>

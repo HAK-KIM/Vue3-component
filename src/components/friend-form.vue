@@ -1,13 +1,38 @@
 <template>
    
-        <form action="">
-            <input type="text" placeholder="First Name">
-            <input type="text" placeholder="Last Name">
-            <input type="text" placeholder="Comment">
+        <form action="" @submit.prevent="setInfo">
+            <input type="text" placeholder="First Name" v-model="firstName">
+            <input type="text" placeholder="Last Name" v-model="lastName">
+            <input type="text" placeholder="Comment" v-model="comment">
             <button class="btn" type="submit">ADD</button>
         </form>
 
 </template>
+
+<script>
+export default {
+  name: 'friend-form',
+  emits: ["addFriendCard"],
+  data() {
+    return {
+      
+        firstName: '',
+        lastName: '',
+        comment: '',
+      
+    };
+  },
+  methods: {
+    setInfo() {
+      this.$emit("addFriendCard",
+      this.firstName,
+      this.lastName,
+      this.comment,
+      );
+    },
+  },
+};
+</script>
 
 <style>
 
